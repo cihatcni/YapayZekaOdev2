@@ -1,12 +1,12 @@
-public class Maze {
+class Maze {
 
-    private int N;
-    private int K;
-    private Point[][] maze;
-    private Point startPoint;
-    private Point finishPoint;
+    private int N;              //Labirent boyu
+    private int K;              //Engel sayısı
+    private Point[][] maze;     //Labirent
+    private Point startPoint;   //Başlangıç noktası
+    private Point finishPoint;  //Bitiş noktası
 
-    public Maze(int n, int k) {
+    Maze(int n, int k) {
         N = n;
         K = k;
         maze = new Point[N][N];
@@ -18,9 +18,9 @@ public class Maze {
             for (int j = 0; j < N; j++)
                 maze[i][j] = new Point(i, j);
 
-        int startX;
-        int startY;
-        int way;
+        int startX; //Engel başlangıç X noktası
+        int startY; //Engel balangıç Y noktası
+        int way;    //Engel ilerleme yönü (yatay/dikey)
 
         for (int i = 0; i < K; i++) {
             boolean isFree = false;
@@ -30,10 +30,10 @@ public class Maze {
                 startY = (int) (Math.random() * 1000) % N;
 
                 isFree = true;
-                if (way == 0) { //AŞAĞI YÖNDE
+                if (way == 0) { //DİKEY YÖNDE
                     for (int j = 0; j < 4; j++) {
                         if (startX + j < N) {
-                            if (maze[startX + j][startY].isWall()) {
+                            if (maze[startX + j][startY].isWall()) { //Seçilen yol dolu ise
                                 isFree = false;
                                 break;
                             }
@@ -42,15 +42,15 @@ public class Maze {
                             break;
                         }
                     }
-                    if (!isFree)
-                        way = 1;
+                    if (!isFree)    //Eğer doluysa
+                        way = 1;    //Diğer yönde denemesi için
                     else
                         for (int j = 0; j < 4; j++)
                             maze[startX + j][startY].setWall(true);
                 }
 
                 isFree = true;
-                if (way == 1) {
+                if (way == 1) {//YATAY YÖNDE
                     for (int j = 0; j < 4; j++) {
                         if (startY + j < N) {
                             if (maze[startX][startY + j].isWall()) {
@@ -76,7 +76,7 @@ public class Maze {
 
     }
 
-    public void printMaze() {
+    void printMaze() {
 
         for (int i = 0; i < N + 2; i++)
             System.out.print("+ ");
@@ -98,23 +98,25 @@ public class Maze {
         System.out.println();
     }
 
-    public Point[][] getMaze() {
-        return maze;
-    }
-
-    public Point getStartPoint() {
+    Point getStartPoint() {
         return startPoint;
     }
 
-    public Point getFinishPoint() {
+    Point getFinishPoint() {
         return finishPoint;
     }
 
-    public int getSize() {
+    int getSize() {
         return N;
     }
 
-    public Point getPoint(int x,int y) {
+    Point getPoint(int x, int y) {
         return maze[x][y];
+    }
+
+    void clearVisited() {
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                maze[i][j].setVisited(false);
     }
 }

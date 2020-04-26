@@ -5,20 +5,27 @@ public class Main {
     static Maze maze;
 
     public static void main(String[] args) {
-        boolean isMazeOk = false;
+
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Maze Size: " );
+        int N = scanner.nextInt(); //Labirent büyüklüğü
+        System.out.print("Barrier Count: ");
+        int K = scanner.nextInt(); //Labirentte bulunacak engel sayısı
+        System.out.println();
+
+        boolean isMazeOk = false; //Kullanıcı labirenti onaylandı mı kontrolü için
         while (!isMazeOk) {
-            maze = new Maze(20, 20);
+            maze = new Maze(N, K);
             maze.printMaze();
-            System.out.print("Onaylamak için 1: ");
+            System.out.print("For Accept Enter 1: "); //Görüntülenen labirent eğer algoritma için uygunsa kullanıcı 1'e basar.
             int x = scanner.nextInt();
             if(x==1)
                 isMazeOk = true;
         }
         scanner.close();
-
-        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(maze, 10000, 20,100);
-        geneticAlgorithm.startAlgorithm();
+        
+        MainFrame frame = new MainFrame();
+		frame.setVisible(true);
     }
 
 }

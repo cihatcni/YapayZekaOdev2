@@ -1,59 +1,50 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Road implements Comparable {
 
-    private ArrayList<Integer> road;
-    private int fitPoint;
-    private boolean isFinished;
-    private HashMap<Integer,Point> isVisited;
-    private static int count;
+    private ArrayList<Integer> road;    //Yol yönleri sırasıyla
+    private int fitPoint;               //Puanı
+    private boolean isFinished;         //Yol sonuca ulaştı mı kontrolü
 
-    public Road() {
+    Road() {
         road = new ArrayList<>();
         fitPoint = 0;
         isFinished = false;
-        isVisited = new HashMap<>();
-        count=0;
     }
 
     void addRoad(int value) {
         road.add(value);
     }
 
-    int getRoadPoint(int index) {
-        return road.get(index);
-    }
-
     int getLastElement() {
         return road.get(road.size()-1);
     }
 
-    public void setFitPoint(int fitPoint) {
+    void setFitPoint(int fitPoint) {
         this.fitPoint = fitPoint;
     }
 
-    public void setRoad(ArrayList<Integer> road) {
+    private void setRoad(ArrayList<Integer> road) {
         this.road = road;
     }
 
-    public ArrayList<Integer> getRoad() {
+    ArrayList<Integer> getRoad() {
         return road;
     }
 
-    public int getFitPoint() {
+    int getFitPoint() {
         return fitPoint;
     }
 
-    public int getLength() {
+    int getLength() {
         return road.size();
     }
 
-    public boolean isFinished() {
+    boolean isFinished() {
         return isFinished;
     }
 
-    public void setFinished(boolean finished) {
+    void setFinished(boolean finished) {
         isFinished = finished;
     }
 
@@ -89,16 +80,4 @@ public class Road implements Comparable {
         return 1;
     }
 
-    boolean addVisited(Point point) {
-        if(!isVisited.containsValue(point)) {
-            isVisited.put(count++, point);
-            return true;
-        }
-
-        return false;
-    }
-
-    void clearMap() {
-        this.isVisited.clear();
-    }
 }

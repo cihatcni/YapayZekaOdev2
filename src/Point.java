@@ -1,40 +1,34 @@
 public class Point {
 
-    private int x;
-    private int y;
-    private boolean isVisited;
-    private boolean isWall;
+    private int x;  //X koordinatı
+    private int y;  //Y koordinatı
+    private boolean isVisited;  //Ziyaret edildi mi kontrolü
+    private boolean isWall;     //Duvar mı kontrolü
 
-    public Point(int x, int y) {
+    Point(int x, int y) {
         this.x = x;
         this.y = y;
         this.isVisited = false;
         this.isWall = false;
     }
 
-    public Point(int x, int y, boolean isWall) {
-        this.x = x;
-        this.y = y;
-        this.isWall = isWall;
-    }
-
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
-    public boolean isWall() {
+    boolean isWall() {
         return isWall;
     }
 
-    public void setWall(boolean wall) {
+    void setWall(boolean wall) {
         isWall = wall;
     }
 
-    public void addXY(int x, int y) {
+    void addXY(int x, int y) {
         this.x += x;
         this.y += y;
         this.isWall = Main.maze.getPoint(this.x, this.y).isWall;
@@ -54,10 +48,17 @@ public class Point {
         return new Point(x, y);
     }
 
-    public int getDiff(Point point) {
+    int getDiff(Point point) {
         return Math.abs(x - point.x) + Math.abs(y - point.y);
     }
 
+    boolean isVisited() {
+        return isVisited;
+    }
+
+    void setVisited(boolean visited) {
+        isVisited = visited;
+    }
 
     @Override
     public boolean equals(Object obj) {
